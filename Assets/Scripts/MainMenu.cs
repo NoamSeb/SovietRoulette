@@ -8,7 +8,7 @@ using TMPro;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] GameData gameData;
-    [SerializeField] int _playerNumber = 2;
+    [SerializeField, Range(2,8)] int _playerNumber = 2;
     [SerializeField] TMP_Text _playerNumberText;
 
     private void Update()
@@ -19,6 +19,7 @@ public class MainMenu : MonoBehaviour
     public void PlayGame()
     {
         SetGameData();
+        //SceneManager.LoadScene("Rayan");
         SceneManager.LoadScene("Game");
     }
 
@@ -30,6 +31,11 @@ public class MainMenu : MonoBehaviour
     [Button]
     public void AddPlayer()
     {
+        if (_playerNumber >= 8)
+        {
+            _playerNumber = 2;
+            return;
+        }
         _playerNumber++;
     }
     
@@ -37,7 +43,12 @@ public class MainMenu : MonoBehaviour
     public void RemovePlayer()
     {
         if (_playerNumber == 2)
+        {
+            _playerNumber= 8;
             return;
+        }
+            
+        
         _playerNumber--;
     }
     public void SetGameData()
