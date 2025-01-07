@@ -8,8 +8,9 @@ public class Pistol : MonoBehaviour
     [SerializeField] GameObject Bullet;
     [SerializeField] AudioSource audioSource;
     [SerializeField] AudioClip shootClip;
+    [SerializeField] AudioClip reloadClip;
 
-   [SerializeField] private int listIndex;
+    [SerializeField] private int listIndex;
     void Start()
     {
         
@@ -48,6 +49,7 @@ public class Pistol : MonoBehaviour
         else
         {
             listIndex++;
+            audioSource.PlayOneShot(reloadClip);
             Debug.Log("Changement de slot");
         }
     }
