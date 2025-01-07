@@ -42,7 +42,8 @@ public class Pistol : MonoBehaviour
     void Update()
     {
         
-        
+        if(alives > 1)
+        {
             if (Input.GetButtonDown("Fire1"))
             {
 
@@ -56,26 +57,26 @@ public class Pistol : MonoBehaviour
                 }
 
             }
-        
-        
-            //if (Input.GetButtonDown("Fire1"))
-            //{
-                
+        }
+        else
+        {
+            if(Input.GetButtonDown("Fire1"))
+            {
 
-            //        Winner();
-                
-            //}
-              
+
+                Winner();
+
+            }
+        }
+            
         
-        
+ 
 
         //if (AllDeath())
         //{
         //    Destroy(gameObject);
         //}
 
-        
-        
     }
 
    void ResetBullet()

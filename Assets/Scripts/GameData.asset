@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30f454f0a4e608146bcd727d04ec75b5, type: 3}
   m_Name: GameData
   m_EditorClassIdentifier: 
-  playerNumber: 0
+  playerNumber: 8
