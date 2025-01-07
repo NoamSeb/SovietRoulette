@@ -3,19 +3,22 @@ using UnityEngine;
 
 public class Pistol : MonoBehaviour
 {
-    public List<GameObject> PistolList;
+    [SerializeField] private const int indexTotal = 10;
+    public GameObject[] PistolArray = new GameObject[indexTotal];
     [SerializeField] GameObject Bullet;
-
+    [SerializeField] AudioSource audioSource;
     [SerializeField] AudioClip shootClip;
 
    [SerializeField] private int listIndex;
     void Start()
     {
+        
         ResetBullet();
         listIndex = 0;
+        Debug.Log(PistolArray.Length);
     }
 
-    // Update is called once per frame
+   
     void Update()
     {
         if (Input.GetButtonDown("Fire1"))
@@ -27,8 +30,8 @@ public class Pistol : MonoBehaviour
 
    void ResetBullet()
     {
-        int bullet_index= UnityEngine.Random.Range(0, PistolList.Count-1);
-        PistolList[bullet_index] = Bullet;
+        int bullet_index= UnityEngine.Random.Range(0, PistolArray.Length-1);
+        PistolArray[bullet_index] = Bullet;
 
     }
 
@@ -37,8 +40,9 @@ public class Pistol : MonoBehaviour
     void ChangeSlot()
     {
         
-        if(PistolList[listIndex] != null)
+        if(PistolArray[listIndex] != null)
         {
+            audioSource.PlayOneShot(shootClip);
             Destroy(gameObject);
         }
         else
