@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class Pistol : MonoBehaviour
 {
@@ -10,13 +12,20 @@ public class Pistol : MonoBehaviour
     [SerializeField] AudioClip shootClip;
     [SerializeField] AudioClip reloadClip;
 
+    [SerializeField] TextMeshProUGUI text;
+
+    [SerializeField] Canvas canvas;
+    
+
     [SerializeField] private int listIndex;
     void Start()
     {
         
         ResetBullet();
-        listIndex = 0;
+  
+        canvas.enabled= false;
         Debug.Log(PistolArray.Length);
+        
     }
 
    
@@ -24,13 +33,22 @@ public class Pistol : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            ChangeSlot();
+            
+            if (canvas.isActiveAndEnabled)
+            {
+                canvas.enabled = false;
+            }
+            else
+            {
+                ChangeSlot();
+            }
             
         }
     }
 
    void ResetBullet()
     {
+        listIndex = 0;
         int bullet_index= UnityEngine.Random.Range(0, PistolArray.Length-1);
         PistolArray[bullet_index] = Bullet;
 
@@ -44,7 +62,10 @@ public class Pistol : MonoBehaviour
         if(PistolArray[listIndex] != null)
         {
             audioSource.PlayOneShot(shootClip);
-            Destroy(gameObject);
+            PistolArray[listIndex] = null;
+            canvas.enabled = true;
+            text.text = $"{null} a perdu :))";
+            ResetBullet();
         }
         else
         {
