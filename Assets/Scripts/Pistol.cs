@@ -23,7 +23,9 @@ public class Pistol : MonoBehaviour
     public int alives;
     int winner;
     public int currentPlayerIndex;
-    
+
+    private bool gameEnded = false;
+
     [SerializeField] private int listIndex;
     void Start()
     {
@@ -39,8 +41,8 @@ public class Pistol : MonoBehaviour
    
     void Update()
     {
-        if(alives > 1)
-        {
+        
+        
             if (Input.GetButtonDown("Fire1"))
             {
 
@@ -54,18 +56,17 @@ public class Pistol : MonoBehaviour
                 }
 
             }
-        }
-        else
-        {
-            if (Input.GetButtonDown("Fire1"))
-            {
+        
+        
+            //if (Input.GetButtonDown("Fire1"))
+            //{
                 
 
-                    Winner();
+            //        Winner();
                 
-            }
+            //}
               
-        }
+        
         
 
         //if (AllDeath())
@@ -104,14 +105,7 @@ public class Pistol : MonoBehaviour
         else
         {
             listIndex++;
-            if (currentPlayerIndex >= gameData.PlayerNumber)
-            {
-                currentPlayerIndex = 1;
-            }
-            else
-            {
-                currentPlayerIndex++;
-            }
+           NextStep();
             audioSource.PlayOneShot(reloadClip);
             //Debug.Log("Changement de slot");
         }
@@ -154,7 +148,7 @@ public class Pistol : MonoBehaviour
 
         }
       
-      
+      Death(index +1);
             
         
     }
@@ -189,4 +183,15 @@ public class Pistol : MonoBehaviour
 
     }
 
+    void NextStep()
+    {
+        if (currentPlayerIndex >= gameData.PlayerNumber)
+        {
+            currentPlayerIndex = 1;
+        }
+        else
+        {
+            currentPlayerIndex++;
+        }
+    }
 }
