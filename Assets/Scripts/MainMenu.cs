@@ -19,7 +19,16 @@ public class MainMenu : MonoBehaviour
     public void PlayGame()
     {
         SetGameData();
+<<<<<<< Updated upstream
         SceneManager.LoadScene("Game");
+=======
+        SceneManager.LoadScene("Rayan");
+<<<<<<< Updated upstream
+        //SceneManager.LoadScene("Game");
+=======
+        // SceneManager.LoadScene("Game");
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
     }
 
     public void ExitGame()
@@ -30,6 +39,11 @@ public class MainMenu : MonoBehaviour
     [Button]
     public void AddPlayer()
     {
+<<<<<<< Updated upstream
+=======
+        if (_playerNumber == 6)
+            return;
+>>>>>>> Stashed changes
         _playerNumber++;
     }
     
