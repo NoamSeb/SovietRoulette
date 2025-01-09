@@ -19,8 +19,8 @@ public class MainMenu : MonoBehaviour
     public void PlayGame()
     {
         SetGameData();
-        //SceneManager.LoadScene("Rayan");
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("Rayan");
+        //SceneManager.LoadScene("Game");
     }
 
     public void ExitGame()
