@@ -1,8 +1,10 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.UI;
 
 public class Pistol : MonoBehaviour
 {
@@ -16,15 +18,19 @@ public class Pistol : MonoBehaviour
     [SerializeField] TextMeshProUGUI text;
 
     [SerializeField] Canvas canvas;
+    [SerializeField] List<Sprite> imageList;
+    private Image canvasImage;
     [SerializeField] Canvas fin_du_jeu;
     [SerializeField] TextMeshProUGUI textWinner;
+
+    [SerializeField] Animator barilletAnim;
 
     private Dictionary<int, bool> nbrPlayers = new Dictionary<int, bool>();
     public int alives;
     int winner;
     public int currentPlayerIndex;
 
-    private bool gameEnded = false;
+    private bool isClicking;
 
     [SerializeField] private int listIndex;
     void Start()
@@ -34,6 +40,7 @@ public class Pistol : MonoBehaviour
         currentPlayerIndex = 1;
         fin_du_jeu.enabled = false;
         canvas.enabled= false;
+        canvasImage= canvas.GetComponentInChildren<Image>();
         
         alives = nbrPlayers.Count;
     }
@@ -64,7 +71,7 @@ public class Pistol : MonoBehaviour
             {
 
 
-                Winner();
+                StartCoroutine(Winner());
 
             }
         }
@@ -92,24 +99,25 @@ public class Pistol : MonoBehaviour
 
     void ChangeSlot()
     {
-        
-        if(PistolArray[listIndex] != null)
-        {
-            audioSource.PlayOneShot(shootClip);
-            PistolArray[listIndex] = null;
-            canvas.enabled = true;
-            Death(currentPlayerIndex);
-            alives--;
+        barilletAnim.SetTrigger("GO");
+        StartCoroutine(WaitAnim());
+        //if(PistolArray[listIndex] != null)
+        //{
+        //    audioSource.PlayOneShot(shootClip);
+        //    PistolArray[listIndex] = null;
+        //    //canvas.enabled = true;
+        //    Death(currentPlayerIndex);
+        //    alives--;
 
-        }
+        //}
 
-        else
-        {
-            listIndex++;
-           NextStep();
-            audioSource.PlayOneShot(reloadClip);
-            //Debug.Log("Changement de slot");
-        }
+        //else
+        //{
+        //    listIndex++;
+        //   NextStep();
+        //    audioSource.PlayOneShot(reloadClip);
+        //    //Debug.Log("Changement de slot");
+        //}
     }
 
     void PrepareDictionnary()
@@ -142,6 +150,7 @@ public class Pistol : MonoBehaviour
         if (nbrPlayers[index] == true)
         {
             nbrPlayers[index] = false;
+
             text.text = $"Le joueur {index} a perdu :))";
             Debug.Log(nbrPlayers[index] + index.ToString());
             ResetBullet();
@@ -168,9 +177,9 @@ public class Pistol : MonoBehaviour
     }
 
     
-    void Winner()
+    IEnumerator Winner()
     {
-        
+        yield return new WaitForSeconds(0.5f);
         foreach(var key in nbrPlayers.Keys)
         {
             if(nbrPlayers[key] == true)
@@ -194,5 +203,35 @@ public class Pistol : MonoBehaviour
         {
             currentPlayerIndex++;
         }
+    }
+
+
+    IEnumerator WaitAnim()
+    {
+        yield return new WaitForSeconds(0.5f);
+        if (PistolArray[listIndex] != null)
+        {
+            audioSource.PlayOneShot(shootClip);
+            PistolArray[listIndex] = null;
+            ChangeImageInCanvas();
+            yield return new WaitForSeconds(0.5f);
+            canvas.enabled = true;
+            Death(currentPlayerIndex);
+            alives--;
+
+        }
+
+        else
+        {
+            listIndex++;
+            NextStep();
+            audioSource.PlayOneShot(reloadClip);
+            //Debug.Log("Changement de slot");
+        }
+    }
+
+    void ChangeImageInCanvas()
+    {
+        canvasImage.sprite = imageList[(UnityEngine.Random.Range(0, (imageList.Count - 1)))];
     }
 }
