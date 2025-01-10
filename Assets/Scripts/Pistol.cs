@@ -232,6 +232,6 @@ public class Pistol : MonoBehaviour
 
     void ChangeImageInCanvas()
     {
-        canvasImage.sprite = imageList[(UnityEngine.Random.Range(0, (imageList.Count - 1)))];
+        canvasImage.sprite = imageList[(UnityEngine.Random.Range(0, (imageList.Count)))];
     }
 }
