@@ -1,3 +1,4 @@
+using Codice.Client.Common.GameUI;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -44,7 +45,9 @@ public class ManagerQuiz : MonoBehaviour
     {
         managerPistolet.SetActive(false);
         managerPistolet.GetComponentInChildren<Pistol>().isShoot = false;
-        namePlayer.text = "Joueur " + managerPistolet.GetComponentInChildren<Pistol>().currentPlayerIndex;
+        //namePlayer.text = "Joueur " + managerPistolet.GetComponentInChildren<Pistol>().currentPlayerIndex;
+        int index = managerPistolet.GetComponentInChildren<Pistol>().currentfinalplayers;
+        namePlayer.text = "Joueur " + managerPistolet.GetComponentInChildren<Pistol>().finalPlayers[index-1];
         canvaQuiz.SetActive(true);
         imgRep.SetActive(false);
 

@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -41,33 +42,42 @@ public class Pistol : MonoBehaviour
     private bool isFinished = false;
 
 
+
+
     public event Action Win;
      private int listIndex;
 
     [SerializeField] GameObject managerQuiz;
     public bool isShoot = false;
 
+    [Header("liste de joueur")]
+    public List<int> finalPlayers;
+    public int finalplayersCount;
+    public int currentfinalplayers = 1;
+
     void Start()
     {
         AudioManager.instance.musicSource.clip = LOFI_background;
         AudioManager.instance.musicSource.Play();
-        PrepareDictionnary();
+        //PrepareDictionnary();
+        PrepareList();
         ResetBullet();
         currentPlayerIndex = 1;
         fin_du_jeu.enabled = false;
         canvas.enabled= false;
         canvasImage= canvas.GetComponentInChildren<Image>();
         Win += () => StartCoroutine(Winner());
-        alives = nbrPlayers.Count;
+        //alives = nbrPlayers.Count;
         isShoot = false;
-
+        currentfinalplayers = 1;
     }
 
    
     void Update()
     {
-        
-        if(alives > 1)
+        alives = finalPlayers.Count;
+
+        if (alives > 1)
         {
             if (Input.GetButtonDown("Fire1"))
             {
@@ -158,6 +168,16 @@ public class Pistol : MonoBehaviour
 
     }
 
+    void PrepareList()
+    {
+        for (int i = 1; i < gameData.PlayerNumber + 1; i++)
+        {
+            finalPlayers.Add(i);
+            finalplayersCount = finalPlayers.Count;
+
+        }
+    }
+
     void Death(int index)
     {
        
@@ -182,18 +202,24 @@ public class Pistol : MonoBehaviour
         
     }
 
-    //bool AllDeath()
-    //{
-        
-    //    foreach (var key in nbrPlayers.Keys)
-    //    {
-    //        if (nbrPlayers[key] == true)
-    //        {
-    //            return false;
-    //        }
-    //    }
-    //    return true;
-    //}
+    void DeathList(int index)
+    {
+        text.text = $"Le joueur {finalPlayers[index]} a perdu :))";
+        Debug.Log(finalPlayers[index] + index.ToString());
+        finalPlayers.RemoveAt(index);
+        currentfinalplayers = index;
+        finalplayersCount= finalPlayers.Count;
+        ResetBullet();
+        return;
+    }
+
+    [Button]
+    void TestDeath()
+    {
+        DeathList(2);
+    }
+
+
 
     
     IEnumerator Winner()
@@ -207,12 +233,14 @@ public class Pistol : MonoBehaviour
                 winner = key;
             }
         }
+
         canvas.enabled = false;
         fin_du_jeu.enabled = true;
         AudioManager.instance.musicSource.Stop();
         AudioManager.instance.musicSource.clip = SIGMABOY;
         AudioManager.instance.musicSource.Play();
-        textWinner.text = $"Le joueur {winner} a gagné !!";
+        //textWinner.text = $"Le joueur {winner} a gagné !!";
+        textWinner.text = $"Le joueur {finalPlayers[0]} a gagné !!";
 
     }
 
@@ -228,6 +256,18 @@ public class Pistol : MonoBehaviour
         }
     }
 
+    void NextStepList()
+    {
+        if (currentfinalplayers >= finalplayersCount )
+        {
+            currentfinalplayers = 1;
+        }
+        else
+        {
+            currentfinalplayers++;
+        }
+    }
+
 
     IEnumerator Shoot()
     {
@@ -239,7 +279,8 @@ public class Pistol : MonoBehaviour
             ChangeImageInCanvas();
             yield return new WaitForSeconds(0.5f);
             canvas.enabled = true;
-            Death(currentPlayerIndex);
+            //Death(currentPlayerIndex);
+            DeathList(currentfinalplayers-1);
             alives--;
             if(alives == 1)
             {
@@ -260,7 +301,8 @@ public class Pistol : MonoBehaviour
             isShoot = true;
         }
 
-        NextStep();
+        //NextStep();
+        NextStepList();
         
     }
 
