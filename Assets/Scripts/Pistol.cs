@@ -10,10 +10,10 @@ using UnityEngine.UI;
 public class Pistol : MonoBehaviour
 {
     [Header("Sons")]
-    [SerializeField] AudioSource audioSource;
     [SerializeField] AudioClip shootClip;
     [SerializeField] AudioClip reloadClip;
     [SerializeField] AudioClip SIGMABOY;
+    [SerializeField] AudioClip LOFI_background;
 
     [Header("Gestion du barillet")]
     public GameObject[] PistolArray ;
@@ -49,6 +49,8 @@ public class Pistol : MonoBehaviour
 
     void Start()
     {
+        AudioManager.instance.musicSource.clip = LOFI_background;
+        AudioManager.instance.musicSource.Play();
         PrepareDictionnary();
         ResetBullet();
         currentPlayerIndex = 1;
@@ -58,6 +60,7 @@ public class Pistol : MonoBehaviour
         Win += () => StartCoroutine(Winner());
         alives = nbrPlayers.Count;
         isShoot = false;
+
     }
 
    
@@ -204,8 +207,11 @@ public class Pistol : MonoBehaviour
                 winner = key;
             }
         }
+        canvas.enabled = false;
         fin_du_jeu.enabled = true;
-        audioSource.PlayOneShot(SIGMABOY);
+        AudioManager.instance.musicSource.Stop();
+        AudioManager.instance.musicSource.clip = SIGMABOY;
+        AudioManager.instance.musicSource.Play();
         textWinner.text = $"Le joueur {winner} a gagné !!";
 
     }
@@ -228,7 +234,7 @@ public class Pistol : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         if (PistolArray[listIndex] != null)
         {
-            audioSource.PlayOneShot(shootClip);
+            AudioManager.instance.SFXSource.PlayOneShot(shootClip);
             PistolArray[listIndex] = null;
             ChangeImageInCanvas();
             yield return new WaitForSeconds(0.5f);
@@ -239,18 +245,23 @@ public class Pistol : MonoBehaviour
             {
                 Win.Invoke();
             }
+            else
+            {
+                isShoot = true;
+            }
 
         }
 
         else
         {
             listIndex++;
-            audioSource.PlayOneShot(reloadClip);
+            AudioManager.instance.SFXSource.PlayOneShot(reloadClip);
             //Debug.Log("Changement de slot");
+            isShoot = true;
         }
 
         NextStep();
-        isShoot = true;
+        
     }
 
     void ChangeImageInCanvas()
