@@ -16,6 +16,10 @@ public class ManagerQuiz : MonoBehaviour
     [SerializeField] Button buttonA;
     [SerializeField] Button buttonB;
 
+    [SerializeField] GameObject imgRep;
+    [SerializeField] GameObject panelVrai;
+    [SerializeField] GameObject panelFaux;
+
     int nbRandom;
 
     void _AffichageQuestion()
@@ -34,6 +38,7 @@ public class ManagerQuiz : MonoBehaviour
     {
         buttonA.onClick.RemoveAllListeners();
         buttonB.onClick.RemoveAllListeners();
+
 
         if (quiz_questions.questions[nbRandom].answer_A.isTrue)
         {
@@ -57,15 +62,22 @@ public class ManagerQuiz : MonoBehaviour
     void _Action1()
     {
         Debug.Log("Vrai");
+        imgRep.SetActive(true);
+        panelVrai.SetActive(true);
+        panelFaux.SetActive(false);
     }
 
     void _Action2()
     {
         Debug.Log("Faux");
+        imgRep.SetActive(true);
+        panelFaux.SetActive(true);
+        panelVrai.SetActive(false);
     }
 
     private void Start()
     {
+        imgRep.SetActive(false);
         _AffichageQuestion();
     }
 }
