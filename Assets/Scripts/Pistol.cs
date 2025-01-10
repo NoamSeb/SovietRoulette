@@ -8,31 +8,40 @@ using UnityEngine.UI;
 
 public class Pistol : MonoBehaviour
 {
-    public GameObject[] PistolArray ;
-    [SerializeField] GameObject Bullet;
+    [Header("Sons")]
     [SerializeField] AudioSource audioSource;
     [SerializeField] AudioClip shootClip;
     [SerializeField] AudioClip reloadClip;
     [SerializeField] AudioClip SIGMABOY;
-    [SerializeField] GameData gameData;
-    [SerializeField] TextMeshProUGUI text;
 
+    [Header("Gestion du barillet")]
+    public GameObject[] PistolArray ;
+    [SerializeField] GameObject Bullet;
+
+    [Header("GameData pour stocker le nbr de joueur")]
+    [SerializeField] GameData gameData;
+
+    [Header("Canvas et Text")]
+    [SerializeField] TextMeshProUGUI text;
     [SerializeField] Canvas canvas;
     [SerializeField] List<Sprite> imageList;
     private Image canvasImage;
     [SerializeField] Canvas fin_du_jeu;
     [SerializeField] TextMeshProUGUI textWinner;
 
+    [Header("Animator")]
     [SerializeField] Animator barilletAnim;
 
     private Dictionary<int, bool> nbrPlayers = new Dictionary<int, bool>();
-    public int alives;
+    private int alives;
     int winner;
-    public int currentPlayerIndex;
+    private int currentPlayerIndex;
 
-    private bool isClicking;
+    private bool isFinished = false;
 
-    [SerializeField] private int listIndex;
+
+    public event Action Win;
+     private int listIndex;
     void Start()
     {
         PrepareDictionnary();
@@ -41,7 +50,7 @@ public class Pistol : MonoBehaviour
         fin_du_jeu.enabled = false;
         canvas.enabled= false;
         canvasImage= canvas.GetComponentInChildren<Image>();
-        
+        Win += () => StartCoroutine(Winner());
         alives = nbrPlayers.Count;
     }
 
@@ -67,11 +76,11 @@ public class Pistol : MonoBehaviour
         }
         else
         {
-            if(Input.GetButtonDown("Fire1"))
+            if(isFinished && Input.GetButtonDown("Fire1"))
             {
 
 
-                StartCoroutine(Winner());
+               //ajouter transition vers la fin
 
             }
         }
@@ -101,23 +110,6 @@ public class Pistol : MonoBehaviour
     {
         barilletAnim.SetTrigger("GO");
         StartCoroutine(WaitAnim());
-        //if(PistolArray[listIndex] != null)
-        //{
-        //    audioSource.PlayOneShot(shootClip);
-        //    PistolArray[listIndex] = null;
-        //    //canvas.enabled = true;
-        //    Death(currentPlayerIndex);
-        //    alives--;
-
-        //}
-
-        //else
-        //{
-        //    listIndex++;
-        //   NextStep();
-        //    audioSource.PlayOneShot(reloadClip);
-        //    //Debug.Log("Changement de slot");
-        //}
     }
 
     void PrepareDictionnary()
@@ -163,23 +155,24 @@ public class Pistol : MonoBehaviour
         
     }
 
-    bool AllDeath()
-    {
+    //bool AllDeath()
+    //{
         
-        foreach (var key in nbrPlayers.Keys)
-        {
-            if (nbrPlayers[key] == true)
-            {
-                return false;
-            }
-        }
-        return true;
-    }
+    //    foreach (var key in nbrPlayers.Keys)
+    //    {
+    //        if (nbrPlayers[key] == true)
+    //        {
+    //            return false;
+    //        }
+    //    }
+    //    return true;
+    //}
 
     
     IEnumerator Winner()
     {
-        yield return new WaitForSeconds(0.5f);
+        isFinished = true;
+        yield return new WaitForSeconds(1f);
         foreach(var key in nbrPlayers.Keys)
         {
             if(nbrPlayers[key] == true)
@@ -189,7 +182,7 @@ public class Pistol : MonoBehaviour
         }
         fin_du_jeu.enabled = true;
         audioSource.PlayOneShot(SIGMABOY);
-        textWinner.text = $"Le joueur {winner} a gagné !! :))";
+        textWinner.text = $"Le joueur {winner} a gagné !!";
 
     }
 
@@ -218,6 +211,10 @@ public class Pistol : MonoBehaviour
             canvas.enabled = true;
             Death(currentPlayerIndex);
             alives--;
+            if(alives == 1)
+            {
+                Win.Invoke();
+            }
 
         }
 
