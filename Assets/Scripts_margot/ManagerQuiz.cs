@@ -1,24 +1,34 @@
+using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ManagerQuiz : MonoBehaviour
 {
+    [Header ("Data de questions")]
     [SerializeField] Quiz quiz_questions;
 
+    [Header("Numéro joueur")]
     [SerializeField] TextMeshProUGUI namePlayer;
-    
+
+    [Header("Gestion affichage des questions et réponses")]
     [SerializeField] TextMeshProUGUI question;
     [SerializeField] TextMeshProUGUI answerA;
     [SerializeField] TextMeshProUGUI answerB;
 
+    [Header("Boutton des réponses")]
     [SerializeField] Button buttonA;
     [SerializeField] Button buttonB;
 
+    [Header("Affichage réponse vrai ou faux")]
     [SerializeField] GameObject imgRep;
     [SerializeField] GameObject panelVrai;
     [SerializeField] GameObject panelFaux;
+
+    [Header("Gestion audio pour mauvaise réponse")]
+    [SerializeField] List<AudioClip> audios;
 
     int nbRandom;
 
