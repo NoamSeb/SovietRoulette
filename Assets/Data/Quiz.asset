@@ -1,0 +1,294 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 197296d9609624b4889544268bdccdc7, type: 3}
+  m_Name: Quiz
+  m_EditorClassIdentifier: 
+  questions:
+  - question: "En quelle ann\xE9e l'Union sovi\xE9tique a-t-elle \xE9t\xE9 fond\xE9e
+      ?"
+    answer_A:
+      isTrue: 0
+      answer: 1917
+    answer_B:
+      isTrue: 1
+      answer: 1922
+  - question: "Qui \xE9tait le premier dirigeant de l'Union sovi\xE9tique ?"
+    answer_A:
+      isTrue: 1
+      answer: "L\xE9nine"
+    answer_B:
+      isTrue: 0
+      answer: Staline
+  - question: "Quel \xE9tait le symbole principal de l'URSS ?"
+    answer_A:
+      isTrue: 1
+      answer: La faucille et le marteau
+    answer_B:
+      isTrue: 0
+      answer: "L'\xE9toile rouge"
+  - question: "Quel \xE9v\xE9nement a marqu\xE9 la fin de l'URSS ?"
+    answer_A:
+      isTrue: 0
+      answer: La chute du mur de Berlin
+    answer_B:
+      isTrue: 1
+      answer: "La d\xE9mission de Mikha\xEFl Gorbatchev"
+  - question: "Quelle \xE9tait la capitale de l'URSS ?"
+    answer_A:
+      isTrue: 1
+      answer: Moscou
+    answer_B:
+      isTrue: 0
+      answer: "Saint-P\xE9tersbourg"
+  - question: "Quel pacte c\xE9l\xE8bre l'URSS a-t-elle sign\xE9 avec l'Allemagne
+      nazie en 1939 ?"
+    answer_A:
+      isTrue: 0
+      answer: Pacte de Varsovie
+    answer_B:
+      isTrue: 1
+      answer: Pacte Molotov-Ribbentrop
+  - question: "Quelle \xE9conomie l'URSS a-t-elle adopt\xE9e ?"
+    answer_A:
+      isTrue: 1
+      answer: "L'\xE9conomie planifi\xE9e"
+    answer_B:
+      isTrue: 0
+      answer: "L'\xE9conomie de march\xE9"
+  - question: "Quelle guerre froide a oppos\xE9 l'URSS aux \xC9tats-Unis ?"
+    answer_A:
+      isTrue: 0
+      answer: "La guerre de Cor\xE9e"
+    answer_B:
+      isTrue: 1
+      answer: La course aux armements
+  - question: "Combien de r\xE9publiques constituaient l'URSS au moment de sa dissolution
+      ?"
+    answer_A:
+      isTrue: 1
+      answer: 15
+    answer_B:
+      isTrue: 0
+      answer: 12
+  - question: "Quelle \xE9tait la langue officielle de l'URSS ?"
+    answer_A:
+      isTrue: 1
+      answer: Le russe
+    answer_B:
+      isTrue: 0
+      answer: L'ukrainien
+  - question: "Quel \xE9v\xE9nement est consid\xE9r\xE9 comme le d\xE9clencheur de
+      la R\xE9volution russe, qui a men\xE9 \xE0 la cr\xE9ation de l'URSS ?"
+    answer_A:
+      isTrue: 1
+      answer: "La Premi\xE8re Guerre mondiale"
+    answer_B:
+      isTrue: 0
+      answer: "La R\xE9volte des paysans"
+  - question: Quel est le plus grand fleuve de Russie ?
+    answer_A:
+      isTrue: 1
+      answer: La Volga
+    answer_B:
+      isTrue: 0
+      answer: Le Danube
+  - question: "Comment s\u2019appelait l\u2019ancienne capitale de la Russie avant
+      Moscou ?"
+    answer_A:
+      isTrue: 0
+      answer: Novgorod
+    answer_B:
+      isTrue: 1
+      answer: "Saint-P\xE9tersbourg"
+  - question: "Quelle montagne est consid\xE9r\xE9e comme le point culminant de la
+      Russie ?"
+    answer_A:
+      isTrue: 1
+      answer: Le mont Elbrouz
+    answer_B:
+      isTrue: 0
+      answer: Le mont Oural
+  - question: "Quel alphabet est utilis\xE9 en Russie ?"
+    answer_A:
+      isTrue: 0
+      answer: Latin
+    answer_B:
+      isTrue: 1
+      answer: Cyrillique
+  - question: "La Russie est situ\xE9e sur deux continents. Lesquels ?"
+    answer_A:
+      isTrue: 1
+      answer: Europe et Asie
+    answer_B:
+      isTrue: 0
+      answer: "Asie et Am\xE9rique"
+  - question: "Quel est le plat traditionnel russe souvent \xE0 base de soupe de
+      betteraves ?"
+    answer_A:
+      isTrue: 0
+      answer: Sushi
+    answer_B:
+      isTrue: 1
+      answer: Borscht
+  - question: "Quel animal est souvent associ\xE9 \xE0 la Russie dans les caricatures
+      ou symboles ?"
+    answer_A:
+      isTrue: 0
+      answer: Le lion
+    answer_B:
+      isTrue: 1
+      answer: L'ours
+  - question: Quel type de climat couvre une grande partie de la Russie ?
+    answer_A:
+      isTrue: 0
+      answer: Tropical
+    answer_B:
+      isTrue: 1
+      answer: Froid et continental
+  - question: "Quel est le nom de la c\xE9l\xE8bre place situ\xE9e \xE0 Moscou, devant
+      le Kremlin ?"
+    answer_A:
+      isTrue: 1
+      answer: Place Rouge
+    answer_B:
+      isTrue: 0
+      answer: Place Verte
+  - question: "Quel est le nom de la poup\xE9e traditionnelle russe, compos\xE9e
+      de plusieurs figurines imbriqu\xE9es ?"
+    answer_A:
+      isTrue: 1
+      answer: Matriochka
+    answer_B:
+      isTrue: 0
+      answer: Babouchka
+  - question: "En Russie, les habitants se d\xE9placent principalement en :"
+    answer_A:
+      isTrue: 0
+      answer: Tank
+    answer_B:
+      isTrue: 1
+      answer: Lada
+  - question: "Quelle activit\xE9 font les Russes en hiver ?"
+    answer_A:
+      isTrue: 0
+      answer: Ils surfent sur la neige.
+    answer_B:
+      isTrue: 1
+      answer: "Ils plongent dans des lacs gel\xE9s."
+  - question: Combien de fuseaux horaires traverse la Russie ?
+    answer_A:
+      isTrue: 0
+      answer: Un seul.
+    answer_B:
+      isTrue: 1
+      answer: 11 fuseaux horaires.
+  - question: Que signifie le mot "vodka" en russe ?
+    answer_A:
+      isTrue: 1
+      answer: '"Petite eau"'
+    answer_B:
+      isTrue: 0
+      answer: '"Eau de feu"'
+  - question: "Quel mythe est souvent associ\xE9 \xE0 la vodka ?"
+    answer_A:
+      isTrue: 1
+      answer: "Elle peut gu\xE9rir les rhumes."
+    answer_B:
+      isTrue: 0
+      answer: Elle peut faire pousser les cheveux.
+  - question: "La vodka peut-elle \xEAtre utilis\xE9e pour nettoyer ?"
+    answer_A:
+      isTrue: 1
+      answer: "Oui, elle peut m\xEAme tuer 99% des microbes."
+    answer_B:
+      isTrue: 0
+      answer: "Non, c\u2019est une insulte \xE0 la boisson !"
+  - question: "La vodka peut-elle \xEAtre utilis\xE9e comme parfum ?"
+    answer_A:
+      isTrue: 1
+      answer: "Oui, si vous voulez sentir comme une f\xEAte russe."
+    answer_B:
+      isTrue: 0
+      answer: "Non, \xE7a attire uniquement les autres amateurs de vodka."
+  - question: "Comment les Russes expliquent-ils la vodka aux \xE9trangers ?"
+    answer_A:
+      isTrue: 1
+      answer: "\"C\u2019est notre version de l\u2019eau b\xE9nite.\""
+    answer_B:
+      isTrue: 0
+      answer: "\"C\u2019est l\u2019option la plus \xE9conomique pour se r\xE9chauffer
+        en hiver.\""
+  - question: Si tu bois de la vodka sous la pluie en Russie, que se passe-t-il ?
+    answer_A:
+      isTrue: 1
+      answer: "Les nuages s\u2019\xE9cartent et la vodka devient plus puissante."
+    answer_B:
+      isTrue: 0
+      answer: La pluie se transforme en vodka pour te rejoindre dans ton aventure.
+  - question: Que fait la vodka russe quand elle rencontre de la neige ?
+    answer_A:
+      isTrue: 1
+      answer: "Elle se transforme en glace, mais de fa\xE7on beaucoup plus classe."
+    answer_B:
+      isTrue: 0
+      answer: Elle envoie un message subliminal aux flocons pour qu'ils forment un
+        cocktail.
+  - question: "Que se passe-t-il quand la vodka se m\xE9lange avec un petit air de
+      musique russe ?"
+    answer_A:
+      isTrue: 0
+      answer: "La vodka se transforme en danseuse de ballet et se met \xE0 pirouetter
+        dans ton verre."
+    answer_B:
+      isTrue: 1
+      answer: "Elle devient une arme secr\xE8te, pr\xEAte \xE0 te faire chanter des
+        chansons que tu ne savais m\xEAme pas que tu connaissais."
+  - question: "Quel grain est traditionnellement utilis\xE9 pour produire la vodka
+      en Russie ?"
+    answer_A:
+      isTrue: 0
+      answer: "Le bl\xE9"
+    answer_B:
+      isTrue: 1
+      answer: Le seigle
+  - question: "Quel est le nom de la premi\xE8re marque de vodka produite en Russie,
+      datant du 18e si\xE8cle ?"
+    answer_A:
+      isTrue: 1
+      answer: Stolichnaya
+    answer_B:
+      isTrue: 0
+      answer: Smirnoff
+  - question: "Quelle est la vodka la plus ch\xE8re du monde ?"
+    answer_A:
+      isTrue: 1
+      answer: Beluga Gold Line
+    answer_B:
+      isTrue: 0
+      answer: Crystal Head
+  - question: "Quelle est la proportion d\u2019alcool que la vodka doit contenir
+      selon la l\xE9gislation russe pour \xEAtre consid\xE9r\xE9e comme de la vodka
+      l\xE9gale ?"
+    answer_A:
+      isTrue: 1
+      answer: 40%
+    answer_B:
+      isTrue: 0
+      answer: 50%
+  - question: "En quelle ann\xE9e la vodka a-t-elle \xE9t\xE9 mentionn\xE9e pour
+      la premi\xE8re fois dans des documents \xE9crits russes ?"
+    answer_A:
+      isTrue: 0
+      answer: 1340
+    answer_B:
+      isTrue: 1
+      answer: 1430
