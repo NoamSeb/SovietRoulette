@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
@@ -35,13 +36,17 @@ public class Pistol : MonoBehaviour
     private Dictionary<int, bool> nbrPlayers = new Dictionary<int, bool>();
     private int alives;
     int winner;
-    private int currentPlayerIndex;
+    public int currentPlayerIndex;
 
     private bool isFinished = false;
 
 
     public event Action Win;
      private int listIndex;
+
+    [SerializeField] GameObject managerQuiz;
+    public bool isShoot = false;
+
     void Start()
     {
         PrepareDictionnary();
@@ -52,6 +57,7 @@ public class Pistol : MonoBehaviour
         canvasImage= canvas.GetComponentInChildren<Image>();
         Win += () => StartCoroutine(Winner());
         alives = nbrPlayers.Count;
+        isShoot = false;
     }
 
    
@@ -84,9 +90,13 @@ public class Pistol : MonoBehaviour
 
             }
         }
-            
-        
- 
+
+
+        if (isShoot && Input.GetMouseButtonDown(0))
+        {
+            managerQuiz.GetComponent<ManagerQuiz>()._AffichageQuestion();
+        }
+
 
         //if (AllDeath())
         //{
@@ -95,21 +105,35 @@ public class Pistol : MonoBehaviour
 
     }
 
-   void ResetBullet()
+   public void ResetBullet()
     {
+        ClearAllBulletInPistol();
         listIndex = 0;
         //currentPlayerIndex = 1;
         int bullet_index= UnityEngine.Random.Range(0, PistolArray.Length-1);
         PistolArray[bullet_index] = Bullet;
-
     }
+
+    void ClearAllBulletInPistol()
+    {
+        for (int i = 0; i < PistolArray.Length; i++)
+        {
+            PistolArray[i] = null;
+        }
+    }
+
+    //public void ResetBulletAndShoot()
+    //{
+    //    ResetBullet();
+    //    StartCoroutine(Shoot());
+    //}
 
 
 
     void ChangeSlot()
     {
         barilletAnim.SetTrigger("GO");
-        StartCoroutine(WaitAnim());
+        StartCoroutine(Shoot());
     }
 
     void PrepareDictionnary()
@@ -199,7 +223,7 @@ public class Pistol : MonoBehaviour
     }
 
 
-    IEnumerator WaitAnim()
+    IEnumerator Shoot()
     {
         yield return new WaitForSeconds(0.5f);
         if (PistolArray[listIndex] != null)
@@ -221,10 +245,12 @@ public class Pistol : MonoBehaviour
         else
         {
             listIndex++;
-            NextStep();
             audioSource.PlayOneShot(reloadClip);
             //Debug.Log("Changement de slot");
         }
+
+        NextStep();
+        isShoot = true;
     }
 
     void ChangeImageInCanvas()

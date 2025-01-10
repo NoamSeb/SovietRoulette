@@ -28,12 +28,26 @@ public class ManagerQuiz : MonoBehaviour
     [SerializeField] GameObject panelFaux;
 
     [Header("Gestion audio pour mauvaise réponse")]
+    [SerializeField] AudioSource audioSource;
     [SerializeField] List<AudioClip> audios;
+
+    [Header("Gestion pistolet")]
+    [SerializeField] GameObject managerPistolet;
+    [SerializeField] GameObject canvaQuiz;
 
     int nbRandom;
 
-    void _AffichageQuestion()
+    int indexRandomAudio;
+    bool rep = false;
+
+    public void _AffichageQuestion()
     {
+        managerPistolet.SetActive(false);
+        managerPistolet.GetComponentInChildren<Pistol>().isShoot = false;
+        namePlayer.text = "Joueur " + managerPistolet.GetComponentInChildren<Pistol>().currentPlayerIndex;
+        canvaQuiz.SetActive(true);
+        imgRep.SetActive(false);
+
         nbRandom = UnityEngine.Random.Range(0,quiz_questions.questions.Count);
 
         question.text = quiz_questions.questions[nbRandom].question;
@@ -42,6 +56,8 @@ public class ManagerQuiz : MonoBehaviour
         answerB.text = quiz_questions.questions[nbRandom].answer_B.answer;
 
         UpdateButtonAnswer();
+        rep = false;
+        managerPistolet.SetActive(false);
     }
 
     void UpdateButtonAnswer()
@@ -52,42 +68,61 @@ public class ManagerQuiz : MonoBehaviour
 
         if (quiz_questions.questions[nbRandom].answer_A.isTrue)
         {
-            buttonA.onClick.AddListener(_Action1);
+            buttonA.onClick.AddListener(_ActionVrai);
         }
         else
         {
-            buttonA.onClick.AddListener(_Action2);
+            buttonA.onClick.AddListener(_ActionFaux);
         }
 
         if (quiz_questions.questions[nbRandom].answer_B.isTrue)
         {
-            buttonB.onClick.AddListener(_Action1);
+            buttonB.onClick.AddListener(_ActionVrai);
         }
         else
         {
-            buttonB.onClick.AddListener(_Action2);
+            buttonB.onClick.AddListener(_ActionFaux);
         }
     }
 
-    void _Action1()
+    void _ActionVrai()
     {
         Debug.Log("Vrai");
+        rep = true;
         imgRep.SetActive(true);
         panelVrai.SetActive(true);
         panelFaux.SetActive(false);
+
+        managerPistolet.GetComponentInChildren<Pistol>().ResetBullet();
     }
 
-    void _Action2()
+    void _ActionFaux()
     {
+        rep = true;
         Debug.Log("Faux");
         imgRep.SetActive(true);
         panelFaux.SetActive(true);
         panelVrai.SetActive(false);
+
+        indexRandomAudio = UnityEngine.Random.Range(0, audios.Count);
+        audioSource.PlayOneShot(audios[indexRandomAudio]);
     }
 
     private void Start()
     {
+        canvaQuiz.SetActive(true);
+        managerPistolet.SetActive(false);
+        rep = false;
         imgRep.SetActive(false);
         _AffichageQuestion();
+    }
+
+    private void Update()
+    {
+        if (rep && Input.GetMouseButtonDown(0))
+        {
+            managerPistolet.SetActive(true);
+            canvaQuiz.SetActive(false);
+        }
     }
 }
