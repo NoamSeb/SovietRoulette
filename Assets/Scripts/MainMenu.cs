@@ -17,6 +17,11 @@ public class MainMenu : MonoBehaviour
     [SerializeField] AudioSource audioSource;
     [SerializeField] Slider sliderVolume;
 
+    private void Start()
+    {
+        AudioManager.instance.PlayBackground();
+    }
+
     private void Reset()
     {
         AudioSource audioSource = GetComponent<AudioSource>();
@@ -67,6 +72,7 @@ public class MainMenu : MonoBehaviour
     public void ChangeVolume()
     {
         Debug.Log("Volume set to: " + sliderVolume.value);
-        audioSource.volume = sliderVolume.value;
+        AudioManager.instance.musicSource.volume = sliderVolume.value;
+        //audioSource.volume = sliderVolume.value;
     }
 }
