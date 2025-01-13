@@ -70,12 +70,14 @@ public class Pistol : MonoBehaviour
         //alives = nbrPlayers.Count;
         isShoot = false;
         currentfinalplayers = 1;
+        alives = finalPlayers.Count;
     }
 
    
     void Update()
     {
-        alives = finalPlayers.Count;
+        
+        //alives = finalPlayers.Count;
 
         if (alives > 1)
         {
@@ -282,7 +284,7 @@ public class Pistol : MonoBehaviour
             //Death(currentPlayerIndex);
             DeathList(currentfinalplayers-1);
             alives--;
-            if(alives == 1)
+            if(alives <= 1)
             {
                 Win.Invoke();
             }
